@@ -1,7 +1,7 @@
 /* ── Home Page Animations & Styles ── */
 
 .homeWrapper {
-  /* overflow: hidden; Removed to allow sticky navbar */
+  overflow-x: hidden; /* Prevent horizontal scroll while allowing sticky navbar */
 }
 
 /* Animations */

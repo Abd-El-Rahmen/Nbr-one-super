@@ -5,11 +5,9 @@
 /* ── Outer Section ── */
 .section {
   position: relative;
-  width: 100vw;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
 
   display: flex;
   align-items: stretch;
