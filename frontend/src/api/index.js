@@ -23,25 +23,36 @@ const request = async (method, path, body = null, isFormData = false) => {
     ? { ...(getToken() ? { Authorization: `Bearer ${getToken()}` } : {}) }
     : authHeaders();
 
+  const controller = new AbortController();
+
+  const timeoutId = setTimeout(() => {
+    controller.abort();
+  }, REQUEST_TIMEOUT_MS);
+
   const options = {
     method,
     headers,
     ...(body ? { body: isFormData ? body : JSON.stringify(body) } : {}),
-    signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
+    signal: controller.signal,
   };
 
   let res;
+
   try {
     res = await fetch(`${BASE_URL}${path}`, options);
+    clearTimeout(timeoutId);
   } catch (networkErr) {
-    // Distinguish between a timeout and a full connectivity failure
-    if (networkErr.name === 'TimeoutError' || networkErr.name === 'AbortError') {
-      throw new Error('انتهت مهلة الاتصال بالخادم — يرجى التحقق من تشغيل الخادم والمحاولة مجدداً.');
+    clearTimeout(timeoutId);
+
+    if (networkErr.name === 'AbortError') {
+      throw new Error('انتهت مهلة الاتصال بالخادم — يرجى المحاولة مرة أخرى.');
     }
+
     throw new Error('تعذّر الوصول إلى الخادم — يرجى التحقق من الاتصال.');
   }
 
   let data;
+
   try {
     data = await res.json();
   } catch {
@@ -54,7 +65,6 @@ const request = async (method, path, body = null, isFormData = false) => {
 
   return data;
 };
-
 // ─── AUTH ─────────────────────────────────────────────────────────────────────
 export const authAPI = {
   login: (credentials) => request('POST', '/auth/login', credentials),
@@ -183,5 +193,6 @@ export const usersAPI = {
 export const getImageUrl = (url) => {
   if (!url) return null;
   if (url.startsWith('http') || url.startsWith('data:')) return url;
-  return `http://${window.location.hostname}:5000${url.startsWith('/') ? '' : '/'}${url}`;
+
+  return `${import.meta.env.VITE_API_URL.replace('/api', '')}${url.startsWith('/') ? '' : '/'}${url}`;
 };
