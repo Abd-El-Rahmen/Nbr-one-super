@@ -13,8 +13,8 @@ const getById = async (id) => {
 };
 
 const create = async (data, imageUrl) => {
-  const { name, slug } = data;
-  const finalSlug = slug || slugify(name);
+  const { name } = data;
+  const finalSlug =  slugify(name);
   const existing = await CategoryModel.findBySlug(finalSlug);
   if (existing) throw new AppError('A category with this slug already exists.', 409);
 
