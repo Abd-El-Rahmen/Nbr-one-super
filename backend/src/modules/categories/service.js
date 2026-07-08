@@ -2,7 +2,11 @@ const CategoryModel = require('./model');
 const AppError = require('../../utils/AppError');
 
 const slugify = (name) =>
-  name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+  name
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, '-')
+    .replace(/[^\p{Script=Arabic}a-z0-9-]/gu, '');
 
 const getAll = async () => CategoryModel.findAll();
 
