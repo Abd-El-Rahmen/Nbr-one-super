@@ -4,7 +4,7 @@
  * Covers 100% of all backend endpoints
  */
 
-const BASE_URL = `http://${window.location.hostname}:5000/api`;
+const BASE_URL = import.meta.env.VITE_API_URL;
 
 // ─── Request timeout (ms) ─────────────────────────────────────────────────────
 const REQUEST_TIMEOUT_MS = 15_000; // 15 seconds
