@@ -268,7 +268,7 @@
 
 @media (max-width: 480px) {
   .nav { gap: 6px; }
-  .logoWrapper { width: 120px; height: 36px; }
+  .logoWrapper { width: 70px; height: 36px; }
   .searchInput { width: 90px; }
   .cartBtn { width: 36px; height: 36px; }
 }
