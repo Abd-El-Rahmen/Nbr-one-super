@@ -448,7 +448,7 @@ const Checkout = () => {
                     >
                       <Home size={22} />
                       <span className={styles.dtLabel}>توصيل للمنزل</span>
-                      <span className={styles.dtPrice}>{fmt(getDeliveryPrice(form.wilaya_code, 'home'))} دج</span>
+                      {deliveryType === 'home' && <span className={styles.dtPrice}>{deliveryPrice} دج</span>}
                     </button>
                     <button
                       type="button"
@@ -457,7 +457,7 @@ const Checkout = () => {
                     >
                       <Building2 size={22} />
                       <span className={styles.dtLabel}>استلام من النقطة</span>
-                      <span className={styles.dtPrice}>{fmt(getDeliveryPrice(form.wilaya_code, 'desk'))} دج</span>
+                      {deliveryType === 'desk' && <span className={styles.dtPrice}>{deliveryPrice} دج</span>}
                     </button>
                   </div>
 
