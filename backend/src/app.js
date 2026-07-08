@@ -24,8 +24,21 @@ const app = express();
 
 // ─── Security ───────────────────────────────────────────────────────────────
 app.use(helmet());
+const allowedOrigins = process.env.ALLOWED_ORIGINS
+  ? process.env.ALLOWED_ORIGINS.split(',').map(origin => origin.trim())
+  : [];
+
 app.use(cors({
-  origin: process.env.ALLOWED_ORIGINS?.split(',') || '*',
+  origin: function (origin, callback) {
+    // Allow requests with no Origin (Postman, curl, server-to-server)
+    if (!origin) return callback(null, true);
+
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+
+    return callback(new Error(`Origin ${origin} not allowed by CORS`));
+  },
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
