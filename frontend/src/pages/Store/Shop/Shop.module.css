@@ -1,0 +1,376 @@
+/* ── Shop Page — Advanced Filters Layout ── */
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Banner */
+.banner {
+  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+  padding: 56px 0 48px;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+.banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,0.12) 2px, transparent 2px);
+  background-size: 28px 28px;
+}
+.bannerTitle {
+  position: relative;
+  font-size: 2.6rem;
+  font-weight: 900;
+  margin-bottom: 10px;
+}
+.bannerSub {
+  position: relative;
+  font-size: 1.05rem;
+  opacity: 0.85;
+}
+
+/* Mobile filter button */
+.mobileFilterBtn {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-pill);
+  padding: 10px 20px;
+  font-weight: 800;
+  font-size: 0.95rem;
+  cursor: pointer;
+  margin-bottom: 24px;
+  position: relative;
+  color: var(--text);
+  transition: all 0.2s;
+}
+.mobileFilterBtn:hover { border-color: var(--primary); color: var(--primary); }
+.filterDot {
+  position: absolute;
+  top: 8px;
+  left: 12px;
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+/* Layout */
+.shopContainer {
+  padding: 40px 24px;
+}
+
+@media (max-width: 480px) {
+  .shopContainer {
+    padding: 20px 16px;
+  }
+}
+
+.layout {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+}
+
+/* ── Sidebar ── */
+.sidebar {
+  width: 280px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  /* Allow internal scrolling for tall filter lists */
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+  /* Hide scrollbar for a cleaner look (optional, but good for sidebars) */
+  scrollbar-width: thin;
+  padding-right: 4px; /* Space for scrollbar */
+}
+
+/* Custom scrollbar for webkit */
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+.sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.sidebar::-webkit-scrollbar-thumb {
+  background-color: rgba(0,0,0,0.1);
+  border-radius: 10px;
+}
+
+.resetBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #fff0f0;
+  color: var(--danger);
+  border: 1px solid rgba(220,38,38,0.2);
+  border-radius: var(--radius-md);
+  padding: 10px 16px;
+  font-weight: 800;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  width: 100%;
+  justify-content: center;
+}
+.resetBtn:hover { background: #ffe4e4; }
+
+/* Filter Block Card */
+.filterBlock {
+  background: var(--surface);
+  border-radius: var(--radius-xl);
+  padding: 20px 20px 16px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+}
+.filterTitle {
+  font-size: 1rem;
+  font-weight: 900;
+  color: var(--text);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Category List */
+.catList { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 4px; }
+.catBtn {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  font-weight: 700;
+  font-size: 0.92rem;
+  cursor: pointer;
+  transition: all 0.18s;
+  background: transparent;
+  border: 1px solid transparent;
+}
+.catBtn:hover { background: var(--bg); color: var(--text); }
+.catBtn.active {
+  background: var(--primary-light);
+  color: var(--primary);
+  border-color: rgba(26,107,60,0.15);
+  font-weight: 900;
+}
+.catCount {
+  font-size: 0.78rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 1px 8px;
+  font-weight: 800;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+.catBtn.active .catCount {
+  background: rgba(26,107,60,0.1);
+  border-color: var(--primary-light);
+  color: var(--primary);
+}
+
+/* Sort Options */
+.sortGroup { display: flex; flex-direction: column; gap: 6px; }
+.sortBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  transition: all 0.18s;
+  text-align: right;
+}
+.sortBtn:hover { background: var(--bg); color: var(--text); }
+.sortActive {
+  background: var(--primary-light);
+  color: var(--primary);
+  border-color: rgba(26,107,60,0.15);
+  font-weight: 900;
+}
+.sortCheck { color: var(--primary); font-size: 0.9rem; }
+
+/* Price Inputs */
+.priceRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.priceInput {
+  flex: 1;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 10px 12px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  background: var(--bg);
+  outline: none;
+  transition: border-color 0.2s;
+  color: var(--text);
+  min-width: 0;
+}
+.priceInput:focus { border-color: var(--primary); }
+.priceSep { color: var(--text-muted); font-weight: 700; flex-shrink: 0; }
+
+/* Toggle Switch */
+.toggleLabel {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  user-select: none;
+}
+.toggle {
+  width: 44px;
+  height: 24px;
+  border-radius: 12px;
+  background: var(--border);
+  position: relative;
+  cursor: pointer;
+  transition: background 0.25s;
+  flex-shrink: 0;
+}
+.toggleOn { background: var(--primary); }
+.toggleThumb {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  transition: transform 0.25s;
+}
+.toggleOn .toggleThumb { transform: translateX(-20px); }
+
+/* Active Filter Tags */
+.filterTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+  animation: fadeInUp 0.3s backwards;
+}
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--primary-light);
+  color: var(--primary);
+  border: 1px solid rgba(26,107,60,0.2);
+  border-radius: var(--radius-pill);
+  padding: 6px 14px;
+  font-size: 0.88rem;
+  font-weight: 800;
+}
+.tag button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  padding: 0;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+.tag button:hover { opacity: 1; }
+
+/* Main Grid */
+.main { flex: 1; min-width: 0; }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 16px;
+}
+.productWrapper { animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) backwards; }
+
+/* States */
+.error {
+  padding: 24px;
+  background: var(--danger-bg);
+  color: var(--danger);
+  border-radius: var(--radius-md);
+  font-weight: 800;
+  border: 1px solid rgba(220,38,38,0.2);
+}
+.empty {
+  padding: 80px 24px;
+  text-align: center;
+  background: var(--surface);
+  border-radius: var(--radius-xl);
+  border: 2px dashed var(--border);
+  color: var(--text-muted);
+}
+.empty h3 { color: var(--text); font-size: 1.4rem; font-weight: 900; margin-bottom: 10px; }
+.emptyReset {
+  background: none;
+  border: none;
+  color: var(--primary);
+  font-weight: 800;
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: inherit;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .mobileFilterBtn { display: flex; }
+  .layout { flex-direction: column; gap: 0; }
+  .sidebar {
+    width: 100%;
+    position: static;
+    display: none;
+    margin-bottom: 24px;
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  }
+  .sidebarOpen { 
+    display: flex;
+    animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  .bannerTitle { font-size: 2rem; }
+}
+
+@media (max-width: 480px) {
+  .banner { padding: 40px 16px; }
+  .bannerTitle { font-size: 1.6rem; margin-bottom: 6px; }
+  .bannerSub { font-size: 0.95rem; }
+  
+  .grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  
+  .sidebar { padding: 16px; margin-bottom: 16px; border-radius: 16px; }
+  .filterBlock { padding-bottom: 16px; margin-bottom: 16px; }
+  .filterTitle { font-size: 0.9rem; }
+  
+  /* The layout container padding from inline style in JSX might interfere, but we assume container handles it */
+}

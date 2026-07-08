@@ -1,0 +1,54 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-weight: 700;
+  border-radius: var(--radius-pill);
+  transition: all 0.2s ease;
+  padding: 10px 24px;
+  font-size: 1rem;
+}
+
+.primary {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.primary:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-1px);
+}
+
+.secondary {
+  background-color: #e0e0e0;
+  color: var(--text-main);
+}
+
+.secondary:hover {
+  background-color: #d5d5d5;
+}
+
+.outline {
+  background-color: transparent;
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+}
+
+.outline:hover {
+  background-color: var(--primary-light);
+}
+
+.ghost {
+  background-color: transparent;
+  color: var(--text-main);
+}
+
+.ghost:hover {
+  background-color: #f0f0f0;
+}
+
+.icon {
+  padding: 8px;
+  border-radius: 50%;
+}

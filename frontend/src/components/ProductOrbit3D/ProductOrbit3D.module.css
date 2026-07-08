@@ -1,0 +1,580 @@
+/* ═══════════════════════════════════════════════════
+   ProductOrbit3D — Light Background, Cards LEFT | Text RIGHT
+═══════════════════════════════════════════════════ */
+
+/* ── Outer Section ── */
+.section {
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+
+  display: flex;
+  align-items: stretch;
+  min-height: 480px;
+  overflow: hidden;
+
+  /* Soft light background with subtle green tint */
+  background: #f4faf6;
+  border-bottom: 1px solid rgba(26, 107, 60, 0.1);
+}
+
+/* Decorative background circles */
+.section::before {
+  content: '';
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(26, 107, 60, 0.08) 0%, transparent 70%);
+  top: -100px;
+  left: -100px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.section::after {
+  content: '';
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(245, 166, 35, 0.07) 0%, transparent 70%);
+  bottom: -80px;
+  left: 30%;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ══════════════════════════════
+   LEFT PANEL (right side visually in RTL) — Text & CTA
+══════════════════════════════ */
+.leftPanel {
+  position: relative;
+  flex: 0 0 42%;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* center text block in its panel */
+  padding: 60px 40px;
+  z-index: 1;
+
+  /* Soft layered bg on text side */
+  background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(244, 250, 246, 0.6) 100%);
+}
+
+/* Faint green top stripe accent */
+.leftPanel::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(to right, transparent, var(--primary), transparent);
+  opacity: 0.3;
+}
+
+.textWrap {
+  position: relative;
+  z-index: 1;
+  max-width: 380px;
+  text-align: right; /* RTL */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--primary-light);
+  border: 1px solid rgba(26, 107, 60, 0.25);
+  color: var(--primary-dark);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  padding: 5px 16px;
+  border-radius: 30px;
+  margin-bottom: 18px;
+}
+
+/* ══════════════════════════════
+   MIDDLE — Green Separator
+══════════════════════════════ */
+.separator {
+  position: relative;
+  flex: 0 0 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  overflow: visible;
+  background: var(--primary); /* fills the center gap between the waves */
+}
+
+/* Glowing white line */
+.sepLine {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(255, 255, 255, 0.3) 15%,
+    rgba(255, 255, 255, 0.6) 50%,
+    rgba(255, 255, 255, 0.3) 85%,
+    transparent 100%
+  );
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+}
+
+/* White orb to contrast against green background */
+.sepOrb {
+  position: relative;
+  z-index: 10;
+  width: 50px;
+  height: 50px;
+  border-radius: 16px;
+  background: #ffffff;
+  border: 2px solid rgba(26, 107, 60, 0.1);
+  box-shadow:
+    0 6px 20px rgba(0, 0, 0, 0.15),
+    0 0 0 4px rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: orbFloat 3.5s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+.sepIcon {
+  color: var(--primary); /* green icon inside white orb */
+}
+
+@keyframes orbFloat {
+  0%, 100% { transform: translateY(0)    rotate(0deg);   }
+  50%       { transform: translateY(-8px) rotate(3deg); }
+}
+
+/* White glow dots at top/bottom */
+.sepDotTop, .sepDotBot {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+}
+
+.sepDotTop { top: 40px;    }
+.sepDotBot { bottom: 40px; }
+
+/* Wavy SVG accents */
+.sepWaveLeft {
+  position: absolute;
+  left: -30px;
+  top: 0;
+  bottom: 0;
+  width: 40px;
+  height: 100%;
+}
+
+.sepWaveRight {
+  position: absolute;
+  right: -30px;
+  top: 0;
+  bottom: 0;
+  width: 40px;
+  height: 100%;
+}
+
+/* ══════════════════════════════
+   RIGHT PANEL (left side visually in RTL) — Floating Cards
+══════════════════════════════ */
+.rightPanel {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 32px;
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* Dot pattern on the cards area */
+.rightPanel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(26, 107, 60, 0.06) 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+  pointer-events: none;
+}
+
+.floatingGrid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  max-width: 620px;
+  position: relative;
+  z-index: 1;
+}
+
+.floatCard {
+  animation: floatUp 4s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.floatCard:nth-child(even)  { animation-duration: 5s; }
+.floatCard:nth-child(3n)    { animation-duration: 4.5s; }
+.floatCard:nth-child(5n)    { animation-duration: 5.5s; }
+
+@keyframes floatUp {
+  0%   { transform: translateY(5px); }
+  100% { transform: translateY(-5px); }
+}
+
+.textWrap {
+  position: relative;
+  z-index: 1;
+  max-width: 380px;
+  text-align: right; /* RTL */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--primary-light);
+  border: 1px solid rgba(26, 107, 60, 0.25);
+  color: var(--primary-dark);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  padding: 5px 16px;
+  border-radius: 30px;
+  margin-bottom: 18px;
+}
+
+.title {
+  font-size: 3.4rem;
+  font-weight: 900;
+  color: var(--primary-dark);
+  line-height: 1.1;
+  letter-spacing: -1.5px;
+  margin: 0 0 16px;
+}
+
+.sub {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  margin-bottom: 28px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--primary);
+  color: #fff;
+  font-weight: 900;
+  font-size: 1rem;
+  padding: 13px 30px;
+  border-radius: 40px;
+  text-decoration: none;
+  box-shadow: 0 6px 24px rgba(26, 107, 60, 0.25);
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s;
+  margin-bottom: 30px;
+}
+
+.btn:hover {
+  transform: translateY(-4px) scale(1.04);
+  background: var(--primary-dark);
+  box-shadow: 0 10px 30px rgba(26, 107, 60, 0.35);
+}
+
+/* Stats row */
+.stats {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.statNum {
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: var(--primary-dark);
+  line-height: 1;
+}
+
+.statLabel {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-weight: 700;
+  margin-top: 3px;
+}
+
+.statDivider {
+  width: 1px;
+  height: 28px;
+  background: rgba(26, 107, 60, 0.2);
+}
+
+/* ── Product Card ── */
+.card {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 8px 12px 8px 8px;
+  text-decoration: none;
+  flex-shrink: 0;
+  width: 174px;
+  /* Strong green border + prominent green shadow */
+  border: 2px solid rgba(26, 107, 60, 0.3);
+  border-right: 5px solid var(--primary);
+  box-shadow:
+    0 8px 24px rgba(26, 107, 60, 0.18),
+    0 2px 8px rgba(0, 0, 0, 0.08),
+    inset 0 0 0 0 rgba(26, 107, 60, 0);
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.2s;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* More prominent green gradient fill inside card */
+.card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 50%;
+  background: linear-gradient(to top, rgba(26, 107, 60, 0.1), transparent);
+  pointer-events: none;
+}
+
+/* Thicker green shimmer at top */
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(to right, rgba(26,107,60,0.3), var(--primary), rgba(26,107,60,0.3));
+}
+
+.card:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow:
+    0 12px 28px rgba(26, 107, 60, 0.18),
+    0 0 0 2px rgba(26, 107, 60, 0.12);
+  border-right-color: var(--primary-dark);
+}
+
+.cardImg {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: #f4faf6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(26, 107, 60, 0.08);
+}
+
+.cardImg img, .miniCollage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: calc(var(--radius-md) - 2px);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card:hover .cardImg img, .card:hover .miniCollage img {
+  transform: scale(1.1);
+}
+
+.miniCollage {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  gap: 1px;
+}
+.miniCollage1 { grid-template-columns: 1fr; }
+.miniCollage2 { grid-template-columns: 1fr 1fr; }
+.miniCollage3 { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; }
+.miniCollage3 img:first-child { grid-row: span 2; }
+.miniCollage4 { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; }
+
+.cardImgPlaceholder { color: #aac4b3; }
+
+.cardBody {
+  flex: 1;
+  min-width: 0;
+}
+
+.cardName {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--text);
+  margin: 0 0 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cardRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cardPrice {
+  font-size: 0.75rem;
+  font-weight: 900;
+  color: var(--primary);
+}
+
+.cardRating {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: #92400e;
+  background: #fef3c7;
+  padding: 1px 6px;
+  border-radius: 20px;
+}
+
+/* ══════════════════════════════
+   Mobile Responsive
+══════════════════════════════ */
+@media (max-width: 900px) {
+  .section {
+    flex-direction: column;  /* text is leftPanel (first in DOM), so it goes on top */
+    min-height: auto;
+  }
+
+  .leftPanel {
+    flex: none;
+    justify-content: center;
+    padding: 44px 24px 20px;
+    background: none;
+  }
+
+  .leftPanel::before {
+    display: none;
+  }
+
+  .textWrap {
+    align-items: center;
+    text-align: center;
+    max-width: 100%;
+  }
+
+  .rightPanel {
+    flex: none;
+    padding: 20px 20px 40px;
+    background: none;
+  }
+
+  .rightPanel::before {
+    display: none;
+  }
+
+  /* On phone: show only 4 bigger cards in a 2x2 grid */
+  .floatingGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Hide cards beyond the first 4 on mobile */
+  .floatCard:nth-child(n + 5) {
+    display: none;
+  }
+
+  /* Bigger cards on phone */
+  .card {
+    width: 100%;
+    padding: 10px 12px 10px 8px;
+    border-radius: 14px;
+  }
+
+  .cardImg {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+  }
+
+  .cardName {
+    font-size: 0.8rem;
+  }
+
+  .cardPrice {
+    font-size: 0.85rem;
+  }
+
+  .separator {
+    flex: none;
+    height: 2px;
+    width: 80%;
+    margin: 0 auto;
+    flex-direction: row;
+    overflow: hidden;
+    background: transparent;
+  }
+
+  .sepLine {
+    top: 50%;
+    left: 0;
+    right: 0;
+    bottom: auto;
+    transform: translateY(-50%);
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--primary), transparent);
+    box-shadow: none;
+  }
+
+  .sepOrb    { display: none; }
+  .sepDotTop { display: none; }
+  .sepDotBot { display: none; }
+  .sepWaveLeft  { display: none; }
+  .sepWaveRight { display: none; }
+
+  .title { font-size: 2.6rem; }
+  .sub   { font-size: 0.95rem; }
+}
+
+@media (max-width: 480px) {
+  .title { font-size: 2rem; }
+  .rightPanel { padding: 36px 20px 28px; }
+  .floatingGrid { grid-template-columns: 1fr 1fr; gap: 12px; max-width: 320px; }
+  .card { border-radius: 14px; }
+  .cardImg { width: 44px; height: 44px; }
+}

@@ -1,0 +1,12 @@
+.footer { background: var(--primary-dark); padding: 60px 0 20px; margin-top: auto; color: #fff; }
+.grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+.brand { display: flex; align-items: center; gap: 10px; font-size: 1.25rem; font-weight: 900; color: #fff; margin-bottom: 16px; }
+.desc { color: rgba(255, 255, 255, 0.75); font-size: 0.95rem; line-height: 1.7; max-width: 400px; }
+.colTitle { font-weight: 800; margin-bottom: 20px; font-size: 1.05rem; color: #fff; }
+.list { display: flex; flex-direction: column; gap: 12px; }
+.flink { color: rgba(255, 255, 255, 0.8); font-size: 0.95rem; transition: color 0.2s, transform 0.2s; display: inline-block; }
+.flink:hover { color: var(--accent); transform: translateX(-4px); }
+.contact { display: flex; flex-direction: column; gap: 14px; }
+.citem { display: flex; align-items: center; gap: 12px; color: rgba(255, 255, 255, 0.8); font-size: 0.95rem; }
+.bottom { border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 24px; text-align: center; color: rgba(255, 255, 255, 0.6); font-size: 0.85rem; }
+@media(max-width:640px){ .grid{grid-template-columns:1fr;gap:32px;} }

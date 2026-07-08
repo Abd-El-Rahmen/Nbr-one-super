@@ -1,0 +1,95 @@
+/* ── CSS Variables that must exist in index.css ── */
+/* --sidebar-w: 240px; --topbar-h: 60px; */
+
+.layout {
+  display: flex;
+  min-height: 100vh;
+  background: var(--bg);
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  /* leave room for sidebar on desktop */
+  min-width: 0;
+}
+
+/* ── Mobile Top Bar ── */
+.mobileTopbar {
+  display: none; /* hidden on desktop */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  height: 56px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.hamburger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  color: var(--text);
+  transition: background 0.15s;
+  cursor: pointer;
+}
+.hamburger:hover { background: var(--bg); }
+
+.mobileBrand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1rem;
+  font-weight: 900;
+  color: var(--primary);
+}
+
+.mobileLogout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  color: var(--danger);
+  transition: background 0.15s;
+  cursor: pointer;
+}
+.mobileLogout:hover { background: var(--danger-bg); }
+
+/* ── Overlay (mobile only) ── */
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 299;
+  backdrop-filter: blur(2px);
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .mobileTopbar { display: flex; }
+  .overlay { display: block; }
+
+  .content {
+    padding-top: 56px; /* height of mobile topbar */
+  }
+}
