@@ -260,8 +260,20 @@ const ProductDetails = () => {
           <div className={styles.category}>{product.category_name || 'بدون قسم'}</div>
           <h1 className={styles.title}>
             {product.name}
-            {product.is_bundle && <span style={{ marginLeft: 8, fontSize: '0.8rem', background: 'var(--primary-light)', color: 'var(--primary)', padding: '2px 8px', borderRadius: 12 }}>📦 باقة</span>}
+            {Number(product.is_bundle) === 1 && (
+              <span style={{ 
+                marginLeft: 8,
+                fontSize: '0.8rem',
+                background: 'var(--primary-light)',
+                color: 'var(--primary)',
+                padding: '2px 8px',
+                borderRadius: 12
+              }}>
+                📦 باقة
+              </span>
+            )}
           </h1>
+
           
           <div className={styles.priceContainer}>
             <div className={styles.price}>{fmt(totalDisplayPrice)} دج</div>
