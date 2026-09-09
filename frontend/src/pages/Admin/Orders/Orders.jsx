@@ -144,6 +144,7 @@ const Orders = () => {
               <p><span>الاسم:</span> ${escapeHTML(order.full_name) || 'غير محدد'}</p>
               <p><span>الهاتف:</span> ${escapeHTML(order.phone) || 'غير محدد'}</p>
               <p><span>الولاية:</span> ${escapeHTML(order.wilaya) || 'غير محدد'} - <span>البلدية:</span> ${escapeHTML(order.commune) || 'غير محدد'}</p>
+                <p><span>الرمز البريدي:</span> ${escapeHTML(order.postal_code) || 'غير محدد'}</p>
               <p><span>العنوان:</span> ${escapeHTML(order.address_line) || 'غير محدد'}</p>
             </div>
             <div class="details-section">

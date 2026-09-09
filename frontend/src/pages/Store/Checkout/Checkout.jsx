@@ -215,6 +215,7 @@ const Checkout = () => {
               <div style={{ fontSize: '0.85rem', color: '#4b5563', lineHeight: 1.8 }}>
                 <div><strong>الولاية:</strong> {selectedWilaya?.name}</div>
                 <div><strong>البلدية:</strong> {form.commune}</div>
+                <div><strong>الرمز البريدي:</strong> {form.postal_code || 'غير محدد'}</div>
                 {deliveryType === 'home' && form.address_line && <div><strong>العنوان:</strong> {form.address_line}</div>}
                 <div><strong>النوع:</strong> {deliveryType === 'home' ? '🏠 توصيل للمنزل' : '🏢 مكتب توقف'}</div>
               </div>
@@ -324,6 +325,7 @@ const Checkout = () => {
           total: total + (deliveryPrice ?? 0),
           wilaya: selectedWilaya?.name || '',
           commune: form.commune,
+          postal_code: form.postal_code,
           delivery_type: deliveryType,
           delivery_fee: deliveryPrice ?? 0,
         };
@@ -434,6 +436,22 @@ const Checkout = () => {
                 <input className={styles.input} placeholder="مثال: شارع الاستقلال، حي النصر"
                   value={form.address_line}
                   onChange={e => setForm({...form, address_line: e.target.value})} />
+              </div>
+
+              {/* Postal Code */}
+              <div className={styles.field}>
+                <label className={styles.label}>الرمز البريدي</label>
+                <input
+                  className={styles.input}
+                  inputMode="numeric"
+                  maxLength={5}
+                  placeholder="مثال: 16000"
+                  value={form.postal_code}
+                  onChange={e => {
+                    const val = e.target.value.replace(/\D/g, '').slice(0, 5);
+                    setForm({...form, postal_code: val});
+                  }}
+                />
               </div>
 
               {/* Delivery Type Selector */}

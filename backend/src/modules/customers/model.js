@@ -8,6 +8,8 @@ const findAll = async ({ limit, offset, search }) => {
       GROUP_CONCAT(DISTINCT full_name SEPARATOR ' • ') as full_name,
       GROUP_CONCAT(DISTINCT address_line SEPARATOR ' • ') as address_line,
       MAX(postal_code) as postal_code,
+      MAX(wilaya) as wilaya,
+      MAX(commune) as commune,
       MAX(created_at) as created_at
     FROM customers WHERE 1=1
   `;

@@ -84,6 +84,8 @@ const Customers = () => {
                   <th>#</th>
                   <th>الاسم الكامل</th>
                   <th>الهاتف</th>
+                  <th>الولاية</th>
+                  <th>البلدية</th>
                   <th>العنوان</th>
                   <th>الرمز البريدي</th>
                   <th>إجراءات</th>
@@ -122,6 +124,8 @@ const Customers = () => {
                       })()}
                     </td>
                     <td>{c.phone}</td>
+                     <td>{c.wilaya || '—'}</td>
+                     <td>{c.commune || '—'}</td>
                     <td style={{ maxWidth: 200, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={c.address_line?.replace(/ • /g, '، ')}>
                       {c.address_line?.split(' • ')[0] || '—'}
                       {c.address_line && c.address_line.split(' • ').length > 1 && <span style={{ color: 'var(--text-muted)', fontSize: '0.8rem', marginRight: 4 }}>...</span>}
@@ -134,7 +138,7 @@ const Customers = () => {
                     </td>
                   </tr>
                 ))}
-                {filtered.length === 0 && <tr><td colSpan={6} className={t.empty}>لا يوجد عملاء</td></tr>}
+                 {filtered.length === 0 && <tr><td colSpan={8} className={t.empty}>لا يوجد عملاء</td></tr>}
               </tbody>
             </table>
           </div>
@@ -147,6 +151,8 @@ const Customers = () => {
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
               <div style={{ gridColumn: '1 / -1' }}><strong>الأسماء المستخدمة:</strong> {selected.full_name?.replace(/ • /g, '، ')}</div>
               <div><strong>الهاتف:</strong> {selected.phone}</div>
+               <div><strong>الولاية:</strong> {selected.wilaya || '—'}</div>
+               <div><strong>البلدية:</strong> {selected.commune || '—'}</div>
               <div><strong>الرمز البريدي:</strong> {selected.postal_code?.split(' • ')[0] || '—'}</div>
               <div style={{ gridColumn: '1 / -1' }}><strong>العناوين المسجلة:</strong> {selected.address_line?.replace(/ • /g, '، ') || '—'}</div>
             </div>

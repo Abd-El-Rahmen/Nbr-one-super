@@ -116,6 +116,7 @@ const MyOrders = () => {
             <div style="font-size: 0.85rem; color: #4b5563; line-height: 1.8">
               <div><strong>الولاية:</strong> ${savedOrder.wilaya}</div>
               <div><strong>البلدية:</strong> ${savedOrder.commune}</div>
+              <div><strong>الرمز البريدي:</strong> ${detail?.postal_code || savedOrder.postal_code || 'غير محدد'}</div>
               ${savedOrder.delivery_type === 'home' && detail?.address_line ? `<div><strong>العنوان:</strong> ${detail.address_line}</div>` : ''}
               <div><strong>النوع:</strong> ${savedOrder.delivery_type === 'home' ? '🏠 توصيل للمنزل' : '🏢 مكتب توقف'}</div>
             </div>
