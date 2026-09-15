@@ -550,7 +550,7 @@ const ProductDetails = () => {
             )}
           </div>
 
-          {/* ── Actions: Quantity + Add to Cart + Order Now ── */}
+          {/* ── Actions: Quantity + Order Now (top row) ── */}
           <div className={styles.actions}>
             {/* Quantity selector */}
             <div>
@@ -595,33 +595,33 @@ const ProductDetails = () => {
               )}
             </div>
 
-            {/* Add to Cart */}
-            <button
-              className={`${styles.addBtn} ${added ? styles.addSuccess : ''}`}
-              onClick={handleAddToCart}
-              disabled={!product.is_active || !inStock}
-            >
-              {added ? (
-                <><CheckCircle2 size={20} /> تمت الإضافة</>
-              ) : (
-                <><ShoppingCart size={20} /> أضف إلى السلة</>
-              )}
-            </button>
+            {/* Order Now — beside quantity */}
+            {product.is_active && inStock && !orderSuccess && (
+              <button
+                className={styles.orderNowBtn}
+                onClick={() => setShowOrderForm(v => !v)}
+              >
+                {showOrderForm ? (
+                  <><X size={20} /> إغلاق نموذج الطلب</>
+                ) : (
+                  <><Zap size={20} /> اطلب الآن</>
+                )}
+              </button>
+            )}
           </div>
 
-          {/* ── Order Now button ── */}
-          {product.is_active && inStock && !orderSuccess && (
-            <button
-              className={styles.orderNowBtn}
-              onClick={() => setShowOrderForm(v => !v)}
-            >
-              {showOrderForm ? (
-                <><X size={20} /> إغلاق نموذج الطلب</>
-              ) : (
-                <><Zap size={20} /> اطلب الآن — بدون سلة</>
-              )}
-            </button>
-          )}
+          {/* ── Add to Cart (full-width, below) ── */}
+          <button
+            className={`${styles.addBtn} ${styles.addBtnFull} ${added ? styles.addSuccess : ''}`}
+            onClick={handleAddToCart}
+            disabled={!product.is_active || !inStock}
+          >
+            {added ? (
+              <><CheckCircle2 size={20} /> تمت الإضافة</>
+            ) : (
+              <><ShoppingCart size={20} /> أضف إلى السلة</>
+            )}
+          </button>
 
           {/* ── Inline Order Form ── */}
           {showOrderForm && !orderSuccess && (
